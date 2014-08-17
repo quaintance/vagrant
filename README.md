@@ -27,8 +27,9 @@
 * The first step is to use git to clone the [Vagrant repository](http://handlebar.staples.com:7990/projects/STAP/repos/vagrant/browse) to your local machine.
 * cd into the repository
 * If using Vagrant for the first time:
-  <pre>vagrant init vagrant-puppet
-       vagrant up
+  <pre>
+  vagrant init vagrant-puppet
+  vagrant up
   </pre>
 * this should start a new virtual machine on your workstation and within about 30-45 seconds you should be able to log in by either going to localhost port 2222 with any ssh client or simply by issuing:
   ```
