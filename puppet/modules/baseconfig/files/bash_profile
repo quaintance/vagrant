@@ -1,0 +1,72 @@
+#my junk drawer, years of weirdness all piled into one file.
+# jeffq
+
+#++++++++++++++++++++ exports
+export EDITOR=vi
+export FCEDIT=vi
+export PATH=$PATH:.:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/admin/sbin:/opt/puppet/bin
+export MOZILLA_HOME=/usr/local/netscape
+export PS1='${PWD}> '
+[ -x /usr/bin/git ] && source ~/.gitbashrc || export PS1='[\!][${host}]:${PWD}> '
+export PS2='=> '
+export PS3='-> '
+export PS4='#$LINENO++ '
+
+export PAGER=less
+
+#++++++++++++++++++++ generic functions
+
+function c { # commandline math using bashcalc
+	if [[ $1 = "-i" ]]; then
+		while true
+			do read -p "" bashcalc;
+			echo "scale=2; ${bashcalc}" | bc ;
+			echo "---------------------";
+		done
+	else
+		echo "scale=2;$*" | bc 
+	fi
+}
+
+export HISTTIMEFORMAT='[%j|%g %T] ' # julian day|year timestamp in shell history.
+export HISTCONTROL=ignoreboth
+set show-all-symlinked-directories
+shopt -s extglob # turn on extended globbing commandline regex.. or something.
+shopt -s histappend # append shell history sessions rather than overwrite.
+shopt -s cdspell # correct my rushed spelling errors.
+# all the tab completes.
+complete -a unalias
+complete -c command type which
+complete -A stopped -P '"%' -S '"' bg
+complete -j -P '"%' -S '"' fg jobs disown
+complete -cf sudo # sudo tab completion.
+complete -cf which # which completion
+complete -cf man # man page completion
+complete -o default -W "$(sed -e 's/ .*//' ~/.ssh/known_hosts|tr ',' '\012'|sort -u)" ssh # ssh complete!
+
+#++++++++++++++++++++ generics
+alias json="python -mjson.tool"                     # formatted puppet catalogs, anyone?
+alias unperl="perl -MO=Deparse,-p,-q,-x=9"          # handy
+alias cperl="perl -MO=Concise,-exec"                # even more handy
+#alias more=less                                    # the most handy
+alias sudoq="sudo /usr/local/admin/sbin/qs5.pl"     # why didnt i just call it qs5?
+alias fssh="sudo fssh"                              #
+alias fscp="sudo fscp"                              # 
+alias pshog="ps aux|awk 'NR>1'|sort -k 3nr|head"    # ...
+alias view='vim -v'                                 # pointless
+alias Grep="grep"                                   # stolen from mark!
+alias grpe="grep"                                   # ditto
+alias gerp="grep"                                   # i dont mystype gerp but just in case
+alias hh="fc -l"                                    # history lovers
+alias fce="fc -e vi "                               # edit!
+alias lss='ls -l|sort -k 5nr|head -30'              # list files in a dir by size.
+alias lsd="ls -aF|grep \/"                          # list directories
+alias l.='ls -d .* --color=tty'                     # show my dot files, please
+alias epochs="perl -le 'print time'"                # seconds since epoch
+alias epochd="perl -e 'printf qq{%d\n},time/86400'" # days since epoch
+alias diff="diff --side-by-side"	            # i generally prefer this mode.
+
+# ever wonder when?
+alias rpmbydate='rpm -qa --queryformat "%{NAME}-%{VERSION}.%{RELEASE} (%{ARCH}) INSTALLED: %{INSTALLTIME:date}\n"'
+
+# fin!

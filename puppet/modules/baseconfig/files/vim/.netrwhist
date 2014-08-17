@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/etc/puppetlabs/puppet/environments/production/modules/lvm/lib/puppet/provider/filesystem'
+let g:netrw_dirhist_2='/home/net1/jquainta/hiera'
+let g:netrw_dirhist_3='/home/net1/jquainta/staples_tcserver/lib/puppet/provider/tcruntime_instance'
